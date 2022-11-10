@@ -7,25 +7,25 @@ namespace TestApp;
 
 public static class MauiProgram
 {
-	public static MauiApp CreateMauiApp()
-	{
-		var builder = MauiApp.CreateBuilder();
-		builder
-			.UseMauiApp<App>()
-			.ConfigureFonts(fonts =>
-			{
-				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-			}).
+    public static MauiApp CreateMauiApp()
+    {
+        var builder = MauiApp.CreateBuilder();
+        builder
+            .UseMauiApp<App>()
+            .ConfigureFonts(fonts =>
+            {
+                fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
+                fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+            }).
              UseMauiApp<App>().UseMauiCommunityToolkitMarkup()
 
-             .Logging.AddSerilog(SetupSerilog(),dispose: true);
+             .Logging.AddSerilog(SetupSerilog(), dispose: true);
 
         //  builder.UseSerilog((context, lc) => lc.WriteTo.Console().ReadFrom.Configuration(context.Configuration));
 
         return builder.Build();
 
-        
+
     }
 
     private static ILogger SetupSerilog()
@@ -34,7 +34,7 @@ public static class MauiProgram
         Log.Logger = new LoggerConfiguration()
         .MinimumLevel.Verbose()
         .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
-        .WriteTo.DatadogLogs("03f0d55d490274c87a61ff7065a232bd", configuration: new DatadogConfiguration() { Url = "https://http-intake.logs.datadoghq.com" })
+        .WriteTo.DatadogLogs("", configuration: new DatadogConfiguration() { Url = "https://http-intake.logs.datadoghq.com" })
         .CreateLogger();
 
         return Log.Logger;
